@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <title>iConfess</title>
+    <style>
+      html {
+        background-image: url("https://res.cloudinary.com/vop/image/fetch/c_fill,f_auto,g_center,w_1280/https://bi-admin.bibleinfo.com/sites/default/files/how-long-hell-burn.png");
+      }
+      div {
+        text-align: center;
+        padding: 5px 5px 5px 5px;
+      }
+      input {
+        padding: 5px 5px 5px 5px;
+      }
+      h2 {
+        padding: 5px 5px 5px 5px;
+      }
+      #application {
+        width: 20%;
+        border-width: 5px;
+        border-style: solid;
+        float: left;
+        background-image: url("https://wp-media.patheos.com/subdomain/sites/8/2019/05/shutterstock_1081984886.jpg");
+      }
+      #numbers {
+        display: inline-block;
+      }
+      #title {
+        text-align: center;
+        color: darkgray;
+      }
+      p div {
+        display: grid;
+        grid-template-areas:
+          '1 1 2 2 3 3'
+          '1 1 2 2 3 3'
+          '1 1 2 2 3 3'
+          '1 1 2 2 3 3'
+          '1 1 2 2 3 3'
+          '1 1 2 2 3 3'
+        grid-gap: 10px;
+        width: 60%;
+      }
+      .one {
+        grid-column-start: 0;
+        grid-column-end: 2;
+        grid-row-start: 0;
+        grid-row-end: 6;
+      }
+      .two {
+        grid-column-start: 2;
+        grid-column-end: 4;
+        grid-row-start: 0;
+        grid-row-end: 6;
+      }
+      .three {
+        grid-column-start: 4;
+        grid-column-end: 6;
+        grid-row-start: 0;
+        grid-row-end: 6;
+      }
+      ul {
+        list-style: none;
+        float: left;
+      }
+    </style>
+    <script>
+
+      function onStart() {
+        document.getElementById("prayers").innerHTML = "0";
+        document.getElementById("message").innerHTML = "You are guaranteed salvation. Unless, that is... you've sinned?";
+      } //onStart
+
+      var lastSin;
+      var sin = ["Abortion", "Encouragement of Other's Sins", "Adultery", "Apostasy", "Blashphemy", "Cheating", "Coveting", "Crossdressing", "Paying Unfair Wages", "Contraception", "Detraction", "Disrespecting Parents", "Divorce", "Participation in Freemasonry", "Envy", "Euthanasia", "Fornication", "Heresy", "Homosexual Actions", "Incest", "Lying", "Masturbation", "Missing Sunday Liturgy", "Murder", "Perjury", "Polygamy", "Pornography", "Taking the Lord's Name in Vain", "Prostitution", "Rape", "Sacrilege", "Scandal", "Schism", "Simony", "Suicide", "Terrorism", "Worshipping Idols"];
+      var penance = [1000, 10, 200, 500, 15, 20, 5, 15, 50, 30, 20, 15, 800, 100, 30, 1000, 200, 300, 250, 250, 10, 200, 30, 1000, 50, 250, 250, 50, 250, 300, 10, 5, 35, 35, 1000, 5000, 50];
+      var lastNumber = -1;
+
+      function check() {
+        if (lastNumber == 34) {
+          document.getElementById("message").innerHTML = "No opportunity to confess this mortal sin. Straight to Hell.";
+          document.getElementById("prayers").innerHTML = "HELL!!";
+        } else if (lastNumber == 18) {
+          document.getElementById("message").innerHTML = "GAY!! Pray this many Hail Mary's to achieve salvation:";
+        } else {
+          if (document.getElementById("prayers").innerHTML != "0") {
+            document.getElementById("message").innerHTML = "You must pray this many Hail Mary's to Achieve Salvation:";
+          } //if
+          if (document.getElementById("prayers").innerHTML === "0") {
+            document.getElementById("message").innerHTML = "You are guaranteed salvation. Until you sin again."
+          } //if
+        } //if-else
+      } //check
+
+      function calculate() {
+        var action = document.getElementById("search").value;
+        if (lastNumber == 34) {
+          window.alert("You're Already in Hell, Bro.");
+        } else {
+          var location = -1;
+          for (let i = 0; i <  sin.length; i++) {
+            if (action.toUpperCase() == sin[i].toUpperCase()) {
+              location = i;
+            } //if
+          } //for
+          var addition = penance[location];
+          if (location == -1) {
+            window.alert("Error 404 Sin Not Found");
+            addition = 404;
+          } else {
+            lastNumber = location;
+          } //if-else
+          var number = document.getElementById("prayers").innerHTML;
+          var numbers = parseInt(number);
+          numbers = numbers + addition;
+          number = numbers.toString();
+          document.getElementById("prayers").innerHTML = number;
+          check();
+        } //if-else
+      } //calculate
+
+      function reduce() {
+        var number = document.getElementById("prayers").innerHTML;
+        var numbers = parseInt(number);
+        if (numbers > 0) {
+          numbers = numbers - 1;
+          number = numbers.toString();
+          document.getElementById("prayers").innerHTML = number;
+          check();
+        } //if
+      } //reduce
+
+      function repeat() {
+        var addition = penance[lastNumber];
+        var number = document.getElementById("prayers").innerHTML;
+        var numbers = parseInt(number);
+        numbers = numbers + addition;
+        number = numbers.toString();
+        document.getElementById("prayers").innerHTML = number;
+        check();
+      } //repeat
+    </script>
+  </head>
+  <body onload="onStart()">
+    <div id="application">
+      <br>
+      <div>
+        <input id="search" type="text" placeholder="Enter Your Sin">
+        <button onclick="calculate()">Enter</button>
+      </div>
+      <h2 id="message"></h2>
+      <div id="numbers">
+        <button onclick="repeat()">Repeat Sin</button>
+        <h1 id="prayers"></h1>
+        <button onclick="reduce()">I Prayed It</button>
+      </div>
+    </div>
+    <p>
+      <h2 id="title">List of Sins:</h2>
+      <div>
+        <ul class="one">
+          <li>Abortion</li>
+          <li>Encouragement of Other's Sins</li>
+          <li>Adultery</li>
+          <li>Apostasty</li>
+          <li>Blasphemy</li>
+          <li>Cheating</li>
+          <li>Coveting</li>
+          <li>Crossdressing</li>
+          <li>Paying Unfair Wages</li>
+          <li>Contraception</li>
+          <li>Detraction</li>
+          <li>Disrespecting Parents</li>
+        </ul>
+        <ul class="two">
+          <li>Divorce</li>
+          <li>Participation in Freemasonry</li>
+          <li>Envy</li>
+          <li>Euthanasia</li>
+          <li>Fornication</li>
+          <li>Heresy</li>
+          <li>Homosexual Actions</li>
+          <li>Incest</li>
+          <li>Lying</li>
+          <li>Masturbation</li>
+          <li>Missing Sunday Liturgy</li>
+          <li>Murder</li>
+        </ul>
+        <ul class="three">
+          <li>Perjury</li>
+          <li>Polygamy</li>
+          <li>Pornography</li>
+          <li>Taking the Lord's Name in Vain</li>
+          <li>Prostitution</li>
+          <li>Rape</li>
+          <li>Sacrilege</li>
+          <li>Scandal</li>
+          <li>Simony</li>
+          <li>Suicide</li>
+          <li>Terrorism</li>
+          <li>Worshipping Idols</li>
+        </ul>
+      </div>
+    </p>
+   </body>
+</html>
